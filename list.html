@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Gallery</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}
+body{background:#f8f8f8;padding:24px;max-width:1200px;margin:0 auto}
+.back{display:inline-block;margin-bottom:24px;padding:10px 18px;background:#222;color:#fff;border-radius:8px;text-decoration:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:18px}
+.item img{width:100%;border-radius:8px;cursor:pointer}
+.item img:hover{opacity:0.85}
+</style>
+</head>
+<body>
+<a class="back" href="./">← Back to Brand List</a>
+<div class="grid" id="imgBox"></div>
+<script>
+// ==========修改这里：换成你的R2图片域名==========
+const baseUrl = "img.yjia.shop/yjia-img/";
+const dir = new URLSearchParams(location.search).get("dir");
+
+// 图片清单！以后上新图片，在这里添加图片文件名
+const fileMap = {
+"dior":["pic1.jpg","pic2.jpg"],
+"chanel":["c1.jpg","c2.jpg"],
+"lv":["lv1.jpg","lv2.jpg"]
+};
+
+const imgList = fileMap[dir] || [];
+const box = document.getElementById("imgBox");
+imgList.forEach(filename=>{
+  const div = document.createElement("div");
+  div.className="item";
+  const a = document.createElement("a");
+  a.href=baseUrl+dir+"/"+filename;
+  a.target="_blank";
+  const img = document.createElement("img");
+  img.src=baseUrl+dir+"/"+filename;
+  a.appendChild(img);
+  div.appendChild(a);
+  box.appendChild(div);
+})
+</script>
+</body>
+</html>
