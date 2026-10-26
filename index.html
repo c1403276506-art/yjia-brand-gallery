@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YJIA Brand Collection</title>
+<link rel="preconnect" href="https://gallery.yjia.shop">
 <style>
 *{
   margin:0;
@@ -11,21 +12,18 @@
   box-sizing:border-box;
   font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-
 body{
   min-height:100vh;
   padding:48px 16px 120px;
   color:#fff;
   position:relative;
   overflow-x:hidden;
-
   background:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 45%),
     radial-gradient(circle at 80% 10%, rgba(212, 175, 55, 0.12), transparent 50%),
     radial-gradient(circle at 50% 90%, rgba(255, 255, 255, 0.05), transparent 40%),
     linear-gradient(135deg, #1a1a1a 0%, #2b2419 35%, #141414 100%);
 }
-
 body::before{
   content:"";
   position:fixed;
@@ -38,14 +36,12 @@ body::before{
   pointer-events:none;
   z-index:0;
 }
-
 .container{
   max-width:1140px;
   margin:0 auto;
   position:relative;
   z-index:1;
 }
-
 .page-title{
   text-align:center;
   font-size:34px;
@@ -54,25 +50,44 @@ body::before{
   margin-bottom:10px;
   color:#f5f5f5;
 }
-
 .page-title span{
   color:#d4af37;
 }
-
 .page-desc{
   text-align:center;
   color:#b8b8b8;
   font-size:14px;
   letter-spacing:2px;
-  margin-bottom:48px;
+  margin-bottom:20px;
+  line-height:1.6;
 }
-
+/*搜索框样式*/
+.search-wrap{
+  text-align:center;
+  margin-bottom:40px;
+}
+#searchInput{
+  width:min(95%,480px);
+  padding:14px 22px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:999px;
+  color:#fff;
+  font-size:15px;
+  outline:none;
+}
+#searchInput::placeholder{
+  color:#999;
+}
+#searchInput:focus{
+  border-color:rgba(212,175,55,0.7);
+  background:rgba(255,255,255,0.09);
+}
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
   gap:28px;
 }
-
 .brand-card{
   background:linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
   border:1px solid rgba(255,255,255,0.12);
@@ -84,7 +99,6 @@ body::before{
   transition:all 0.35s ease;
   position:relative;
 }
-
 .brand-card::before{
   content:"";
   position:absolute;
@@ -99,18 +113,15 @@ body::before{
   transition:opacity 0.35s ease;
   pointer-events:none;
 }
-
 .brand-card:hover{
   transform:translateY(-8px);
   border-color:rgba(212,175,55,0.45);
   box-shadow:0 20px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.25);
   background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
 }
-
 .brand-card:hover::before{
   opacity:1;
 }
-
 .brand-logo{
   width:100%;
   height:170px;
@@ -119,8 +130,8 @@ body::before{
   justify-content:center;
   padding:22px;
   background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  position:relative;
 }
-
 .brand-logo img{
   max-width:100%;
   max-height:100%;
@@ -128,11 +139,23 @@ body::before{
   filter:brightness(1.1) contrast(1.05);
   transition:transform 0.4s ease;
 }
-
 .brand-card:hover .brand-logo img{
   transform:scale(1.06);
 }
-
+/*图片加载失败文字占位*/
+.logo-fallback{
+  position:absolute;
+  color:#888;
+  font-size:22px;
+  letter-spacing:2px;
+  display:none;
+}
+img.img-error{
+  display:none;
+}
+img.img-error + .logo-fallback{
+  display:block;
+}
 .brand-name{
   padding:16px;
   font-size:14px;
@@ -141,97 +164,59 @@ body::before{
   color:#f0f0f0;
   border-top:1px solid rgba(255,255,255,0.08);
 }
-
-.contact-float{
+/*右下角悬浮WhatsApp按钮*/
+.wa-float{
   position:fixed;
   right:28px;
   bottom:28px;
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-  z-index:50;
-}
-
-.contact-btn{
   width:56px;
   height:56px;
   border-radius:50%;
+  background:#25D366;
   display:flex;
   align-items:center;
   justify-content:center;
   color:#fff;
   font-size:26px;
   text-decoration:none;
+  z-index:50;
   box-shadow:0 10px 24px rgba(0,0,0,0.45);
   transition:transform 0.25s ease;
-  position:relative;
-  overflow:hidden;
 }
-
-.contact-btn::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  padding:1px;
-  background:linear-gradient(145deg, rgba(255,255,255,0.6), transparent);
-  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;
-          mask-composite:exclude;
-  pointer-events:none;
-}
-
-.contact-btn:hover{
+.wa-float:hover{
   transform:scale(1.12);
-}
-
-.wa{
-  background:#25D366;
-}
-
-.mail{
-  background:#448aff;
+  background:#1fbb59;
 }
 
 @media(max-width:768px){
   body{
     padding:32px 14px 100px;
   }
-
   .page-title{
     font-size:26px;
     letter-spacing:3px;
   }
-
   .page-desc{
     font-size:12px;
     letter-spacing:1px;
-    margin-bottom:32px;
+    margin-bottom:20px;
   }
-
   .grid{
     grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
     gap:16px;
   }
-
   .brand-logo{
     height:130px;
     padding:16px;
   }
-
   .brand-name{
     font-size:12px;
     letter-spacing:1px;
     padding:12px;
   }
-
-  .contact-float{
+  .wa-float{
     right:16px;
     bottom:16px;
-    gap:12px;
-  }
-
-  .contact-btn{
     width:50px;
     height:50px;
     font-size:22px;
@@ -240,18 +225,21 @@ body::before{
 </style>
 </head>
 <body>
-
 <div class="container">
   <h1 class="page-title">YJIA <span>Brand</span> Collection</h1>
-  <p class="page-desc">LUXURY FASHION & JEWELRY GALLERY</p>
+  <!--1.首页说明文案-->
+  <p class="page-desc">LUXURY FASHION & JEWELRY GALLERY. Click brand to view catalog, contact WhatsApp for wholesale inquiry.</p>
+
+  <!--7.品牌搜索输入框-->
+  <div class="search-wrap">
+    <input id="searchInput" placeholder="Search brand name..." />
+  </div>
 
   <div class="grid" id="brandGrid"></div>
 </div>
 
-<div class="contact-float">
-  <a class="contact-btn wa" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp">💬</a>
-  <a class="contact-btn mail" href="mailto:c1403276506@gmail.com" title="Email">✉️</a>
-</div>
+<!--2.全局悬浮WA按钮，号码已填好-->
+<a class="wa-float" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp Contact">💬</a>
 
 <script>
 // ==============================================
@@ -259,6 +247,7 @@ body::before{
 // ==============================================
 const LOGO_BASE_URL = "https://img.yjia.shop/";
 
+//原有完整品牌数组，未改动
 const brands = [
   { folder: "ALEXANDER MCQUEEN", logoFile: "ALEXANDER MCQUEEN-logo.png", displayName: "ALEXANDER MCQUEEN" },
   { folder: "Armani", logoFile: "Armani-logo.png", displayName: "Armani" },
@@ -293,39 +282,49 @@ const brands = [
   { folder: "lv", logoFile: "lv-logo.png", displayName: "LV" }
 ];
 
+//4.增加 All Items 入口
+const allItem = {
+  folder:"",
+  logoFile:"all-logo.png",
+  displayName:"All Items"
+};
+brands.unshift(allItem);
+
 const grid = document.getElementById("brandGrid");
+const cardDomList = [];
 
 brands.forEach(brand => {
   const logoUrl = LOGO_BASE_URL + brand.logoFile;
-
   const card = document.createElement("a");
   card.className = "brand-card";
   card.href = "https://gallery.yjia.shop/?brand=" + encodeURIComponent(brand.folder);
-  card.target = "_self";
+  card.target = "_blank"; //6.全部链接新标签打开图库
+  card.dataset.searchName = brand.displayName.toLowerCase();
 
   card.innerHTML = `
     <div class="brand-logo">
-      <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy">
+      <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy" onerror="this.classList.add('img-error')">
+      <div class="logo-fallback">${brand.displayName}</div>
     </div>
     <div class="brand-name">${brand.displayName}</div>
   `;
-
   grid.appendChild(card);
+  cardDomList.push(card);
 });
-</script>
 
+//7.搜索筛选逻辑
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input",function(){
+  const keyword = this.value.trim().toLowerCase();
+  cardDomList.forEach(card=>{
+    const name = card.dataset.searchName;
+    if(name.includes(keyword)){
+      card.style.display = "";
+    }else{
+      card.style.display = "none";
+    }
+  })
+})
+</script>
 </body>
 </html>
-1688找货源
-
-
-❯
-
-
-
-
-logo
-1688
-官方采购助手
-·
-close
