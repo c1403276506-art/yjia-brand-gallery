@@ -3,177 +3,207 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YJIA - Brand Gallery</title>
+<title>YJIA Brand Collection</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,-apple-system,sans-serif}
-body{background:#f8f8f8;padding:40px 20px}
-h1{text-align:center;margin-bottom:40px;color:#222;font-weight:500}
-.brand-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px}
-.brand-card{background:#fff;border-radius:16px;overflow:hidden;text-decoration:none;color:#222;transition:0.25s ease;box-shadow:0 2px 10px #0000000a}
-.brand-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px #00000015}
-.brand-img{width:100%;height:160px;object-fit:contain;padding:16px;background:#fff}
-.brand-name{padding:14px;text-align:center;font-size:17px;font-weight:500}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, -apple-system, sans-serif;}
+body{
+  background: linear-gradient(135deg, #f7f4f0 0%, #eef2f7 100%);
+  min-height:100vh;
+  padding:40px 16px 100px;
+}
+.container{
+  max-width:1100px;
+  margin:0 auto;
+}
+.page-title{
+  text-align:center;
+  font-size:32px;
+  color:#222;
+  margin-bottom:12px;
+  font-weight:500;
+}
+.page-desc{
+  text-align:center;
+  color:#666;
+  margin-bottom:40px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));
+  gap:24px;
+}
+.brand-card{
+  background:#ffffffdd;
+  backdrop-filter: blur(6px);
+  border-radius:16px;
+  padding:30px 12px;
+  text-align:center;
+  text-decoration:none;
+  color:#222;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: all 0.25s ease;
+  border:1px solid rgba(255,255,255,0.7);
+}
+.brand-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.1);
+  background:#fff;
+}
+.brand-card h3{
+  font-size:18px;
+  font-weight:500;
+}
+
+/* 悬浮联系按钮（右下角固定） */
+.contact-float{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  z-index:99;
+}
+.contact-btn{
+  width:54px;
+  height:54px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+  font-size:24px;
+  text-decoration:none;
+  box-shadow:0 4px 14px rgba(0,0,0,0.15);
+  transition:transform 0.2s;
+}
+.contact-btn:hover{
+  transform:scale(1.08);
+}
+.wa{
+  background:#25D366;
+}
+.mail{
+  background:#448aff;
+}
+
+@media(max-width:600px){
+  .contact-float{
+    right:16px;
+    bottom:16px;
+  }
+  .grid{
+    gap:16px;
+  }
+}
 </style>
 </head>
 <body>
-<h1>Brand Gallery</h1>
-<div class="brand-wrap">
+<div class="container">
+  <h1 class="page-title">YJIA Brand Collection</h1>
+  <p class="page-desc">Click brand to view jewelry & bags catalog</p>
 
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=ALEXANDER MCQUEEN">
-  <img class="brand-img" src="https://img.yjia.shop/ALEXANDER%20MCQUEEN-logo.png">
-  <div class="brand-name">ALEXANDER MCQUEEN</div>
-</a>
+  <div class="grid">
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=ALEXANDER MCQUEEN">
+      <h3>ALEXANDER MCQUEEN</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Armani">
+      <h3>Armani</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=BOTTEGAVENETA">
+      <h3>BOTTEGAVENETA</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=BVLGARI">
+      <h3>BVLGARI</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Balenciaga">
+      <h3>Balenciaga</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Burberry">
+      <h3>Burberry</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=CELINE">
+      <h3>CELINE</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=CHAUMET">
+      <h3>CHAUMET</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Cartier">
+      <h3>Cartier</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Dolce&Gabbana">
+      <h3>Dolce&Gabbana</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=FENDI">
+      <h3>FENDI</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=FRED">
+      <h3>FRED</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Givenchy">
+      <h3>Givenchy</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Graff">
+      <h3>Graff</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Hermès">
+      <h3>Hermès</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=LOEWE">
+      <h3>LOEWE</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Messika">
+      <h3>Messika</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Miu Miu">
+      <h3>Miu Miu</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=PRADA">
+      <h3>PRADA</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=SWAROVSKI">
+      <h3>SWAROVSKI</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=TIFFANY & CO">
+      <h3>TIFFANY & CO</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=TORY BURCH">
+      <h3>TORY BURCH</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=VALENTINO">
+      <h3>VALENTINO</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Van Cleef & Arpels">
+      <h3>Van Cleef & Arpels</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=Versace">
+      <h3>Versace</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=VivienneWestwood">
+      <h3>VivienneWestwood</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=YSL">
+      <h3>YSL</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=chanel">
+      <h3>chanel</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=dior">
+      <h3>dior</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=gucci">
+      <h3>gucci</h3>
+    </a>
+    <a class="brand-card" href="https://gallery.yjia.shop/?brand=lv">
+      <h3>lv</h3>
+    </a>
+  </div>
+</div>
 
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Armani">
-  <img class="brand-img" src="https://img.yjia.shop/Armani-logo.png">
-  <div class="brand-name">Armani</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=BOTTEGAVENETA">
-  <img class="brand-img" src="https://img.yjia.shop/BOTTEGAVENETA-logo.png">
-  <div class="brand-name">BOTTEGAVENETA</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=BVLGARI">
-  <img class="brand-img" src="https://img.yjia.shop/BVLGARI-logo.png">
-  <div class="brand-name">BVLGARI</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Balenciaga">
-  <img class="brand-img" src="https://img.yjia.shop/Balenciaga-logo.png">
-  <div class="brand-name">Balenciaga</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Burberry">
-  <img class="brand-img" src="https://img.yjia.shop/Burberry-logo.png">
-  <div class="brand-name">Burberry</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=CELINE">
-  <img class="brand-img" src="https://img.yjia.shop/CELINE-logo.png">
-  <div class="brand-name">CELINE</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=CHAUMET">
-  <img class="brand-img" src="https://img.yjia.shop/CHAUMET-logo.png">
-  <div class="brand-name">CHAUMET</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Cartier">
-  <img class="brand-img" src="https://img.yjia.shop/Cartier-logo.png">
-  <div class="brand-name">Cartier</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Dolce&Gabbana">
-  <img class="brand-img" src="https://img.yjia.shop/Dolce%26Gabbana-logo.png">
-  <div class="brand-name">Dolce&Gabbana</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=FENDI">
-  <img class="brand-img" src="https://img.yjia.shop/FENDI-logo.png">
-  <div class="brand-name">FENDI</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=FRED">
-  <img class="brand-img" src="https://img.yjia.shop/FRED-logo.png">
-  <div class="brand-name">FRED</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Givenchy">
-  <img class="brand-img" src="https://img.yjia.shop/Givenchy-logo.png">
-  <div class="brand-name">Givenchy</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Graff">
-  <img class="brand-img" src="https://img.yjia.shop/Graff-logo.png">
-  <div class="brand-name">Graff</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Hermès">
-  <img class="brand-img" src="https://img.yjia.shop/Herm%C3%A8s-logo.png">
-  <div class="brand-name">Hermès</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=LOEWE">
-  <img class="brand-img" src="https://img.yjia.shop/LOEWE-logo.png">
-  <div class="brand-name">LOEWE</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Messika">
-  <img class="brand-img" src="https://img.yjia.shop/Messika-logo.png">
-  <div class="brand-name">Messika</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Miu Miu">
-  <img class="brand-img" src="https://img.yjia.shop/Miu%20Miu-logo.png">
-  <div class="brand-name">Miu Miu</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=PRADA">
-  <img class="brand-img" src="https://img.yjia.shop/PRADA-logo.png">
-  <div class="brand-name">PRADA</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=SWAROVSKI">
-  <img class="brand-img" src="https://img.yjia.shop/SWAROVSKI-logo.png">
-  <div class="brand-name">SWAROVSKI</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=TIFFANY & CO">
-  <img class="brand-img" src="https://img.yjia.shop/TIFFANY%20%26%20CO-logo.png">
-  <div class="brand-name">TIFFANY & CO</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=TORY BURCH">
-  <img class="brand-img" src="https://img.yjia.shop/TORY%20BURCH-logo.png">
-  <div class="brand-name">TORY BURCH</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=VALENTINO">
-  <img class="brand-img" src="https://img.yjia.shop/VALENTINO-logo.png">
-  <div class="brand-name">VALENTINO</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Van Cleef & Arpels">
-  <img class="brand-img" src="https://img.yjia.shop/Van%20Cleef%20%26%20Arpels-logo.png">
-  <div class="brand-name">Van Cleef & Arpels</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=Versace">
-  <img class="brand-img" src="https://img.yjia.shop/Versace-logo.png">
-  <div class="brand-name">Versace</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=VivienneWestwood">
-  <img class="brand-img" src="https://img.yjia.shop/VivienneWestwood-logo.png">
-  <div class="brand-name">VivienneWestwood</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=YSL">
-  <img class="brand-img" src="https://img.yjia.shop/YSL-logo.png">
-  <div class="brand-name">YSL</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=chanel">
-  <img class="brand-img" src="https://img.yjia.shop/chanel-logo.png">
-  <div class="brand-name">CHANEL</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=dior">
-  <img class="brand-img" src="https://img.yjia.shop/dior-logo.png">
-  <div class="brand-name">DIOR</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=gucci">
-  <img class="brand-img" src="https://img.yjia.shop/Gucci-logo.png">
-  <div class="brand-name">GUCCI</div>
-</a>
-
-<a class="brand-card" href="https://gallery.yjia.shop/?brand=lv">
-  <img class="brand-img" src="https://img.yjia.shop/lv-logo.png">
-  <div class="brand-name">LV</div>
-</a>
-
+<!-- 右下角悬浮联系按钮 -->
+<div class="contact-float">
+  <a class="contact-btn wa" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp">💬</a>
+  <a class="contact-btn mail" href="mailto:c1403276506@gmail.com" title="Email">✉️</a>
 </div>
 </body>
 </html>
