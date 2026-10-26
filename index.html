@@ -85,7 +85,7 @@ body::before{
 }
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
   gap:28px;
 }
 .brand-card{
@@ -94,7 +94,6 @@ body::before{
   border-radius:20px;
   overflow:hidden;
   text-align:center;
-  text-decoration:none;
   color:#f5f5f5;
   transition:all 0.35s ease;
   position:relative;
@@ -157,12 +156,33 @@ img.img-error + .logo-fallback{
   display:block;
 }
 .brand-name{
-  padding:16px;
+  padding:12px 16px 8px;
   font-size:14px;
   letter-spacing:2px;
   font-weight:500;
   color:#f0f0f0;
   border-top:1px solid rgba(255,255,255,0.08);
+}
+/*分类按钮组 jewelry / bag*/
+.btn-group{
+  display:flex;
+  gap:8px;
+  padding:0 14px 16px;
+}
+.btn-group a{
+  flex:1;
+  display:block;
+  padding:8px 4px;
+  font-size:12px;
+  border-radius:8px;
+  text-decoration:none;
+  letter-spacing:1px;
+  border:1px solid rgba(212,175,55,0.4);
+  color:#d4af37;
+  transition:0.25s;
+}
+.btn-group a:hover{
+  background:rgba(212,175,55,0.25);
 }
 /*右下角悬浮WhatsApp按钮*/
 .wa-float{
@@ -187,7 +207,6 @@ img.img-error + .logo-fallback{
   transform:scale(1.12);
   background:#1fbb59;
 }
-
 @media(max-width:768px){
   body{
     padding:32px 14px 100px;
@@ -202,7 +221,7 @@ img.img-error + .logo-fallback{
     margin-bottom:20px;
   }
   .grid{
-    grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-columns:repeat(auto-fill, minmax(170px, 1fr));
     gap:16px;
   }
   .brand-logo{
@@ -212,7 +231,15 @@ img.img-error + .logo-fallback{
   .brand-name{
     font-size:12px;
     letter-spacing:1px;
-    padding:12px;
+    padding:10px 12px 6px;
+  }
+  .btn-group{
+    gap:6px;
+    padding:0 10px 12px;
+  }
+  .btn-group a{
+    padding:7px 2px;
+    font-size:11px;
   }
   .wa-float{
     right:16px;
@@ -229,25 +256,20 @@ img.img-error + .logo-fallback{
   <h1 class="page-title">YJIA <span>Brand</span> Collection</h1>
   <!--1.首页说明文案-->
   <p class="page-desc">LUXURY FASHION & JEWELRY GALLERY. Click brand to view catalog, contact WhatsApp for wholesale inquiry.</p>
-
   <!--7.品牌搜索输入框-->
   <div class="search-wrap">
     <input id="searchInput" placeholder="Search brand name..." />
   </div>
-
   <div class="grid" id="brandGrid"></div>
 </div>
-
 <!--2.全局悬浮WA按钮，号码已填好-->
 <a class="wa-float" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp Contact">💬</a>
-
 <script>
 // ==============================================
 // 【这里只需要填一次你的 Logo 基础域名】
 // ==============================================
 const LOGO_BASE_URL = "https://img.yjia.shop/";
-
-//原有完整品牌数组，未改动
+//品牌数组，保留原有全部品牌，移除All‑Items（当前Worker不支持空folder）
 const brands = [
   { folder: "ALEXANDER MCQUEEN", logoFile: "ALEXANDER MCQUEEN-logo.png", displayName: "ALEXANDER MCQUEEN" },
   { folder: "Armani", logoFile: "Armani-logo.png", displayName: "Armani" },
@@ -282,24 +304,17 @@ const brands = [
   { folder: "lv", logoFile: "lv-logo.png", displayName: "LV" }
 ];
 
-//4.增加 All Items 入口
-const allItem = {
-  folder:"",
-  logoFile:"all-logo.png",
-  displayName:"All Items"
-};
-brands.unshift(allItem);
-
 const grid = document.getElementById("brandGrid");
 const cardDomList = [];
-
 brands.forEach(brand => {
   const logoUrl = LOGO_BASE_URL + brand.logoFile;
-  const card = document.createElement("a");
+  const card = document.createElement("div");
   card.className = "brand-card";
-  card.href = "https://gallery.yjia.shop/?brand=" + encodeURIComponent(brand.folder);
-  card.target = "_blank"; //6.全部链接新标签打开图库
   card.dataset.searchName = brand.displayName.toLowerCase();
+
+  // 两个跳转链接，必须同时携带 brand + type
+  const jewelryUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=jewelry`;
+  const bagUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=bag`;
 
   card.innerHTML = `
     <div class="brand-logo">
@@ -307,12 +322,16 @@ brands.forEach(brand => {
       <div class="logo-fallback">${brand.displayName}</div>
     </div>
     <div class="brand-name">${brand.displayName}</div>
+    <div class="btn-group">
+      <a href="${jewelryUrl}" target="_blank">Jewelry</a>
+      <a href="${bagUrl}" target="_blank">Bag</a>
+    </div>
   `;
   grid.appendChild(card);
   cardDomList.push(card);
 });
 
-//7.搜索筛选逻辑
+//搜索筛选逻辑
 const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input",function(){
   const keyword = this.value.trim().toLowerCase();
