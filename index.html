@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YJIA Brand Catalog</title>
-<link rel="preconnect" href="https://gallery.yjia.shop">
+<title>YJIA Brand Collection</title>
 <style>
 *{
   margin:0;
@@ -12,18 +11,21 @@
   box-sizing:border-box;
   font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+
 body{
   min-height:100vh;
-  padding:40px 16px 120px;
+  padding:48px 16px 120px;
   color:#fff;
   position:relative;
   overflow-x:hidden;
+
   background:
     radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 45%),
     radial-gradient(circle at 80% 10%, rgba(212, 175, 55, 0.12), transparent 50%),
     radial-gradient(circle at 50% 90%, rgba(255, 255, 255, 0.05), transparent 40%),
     linear-gradient(135deg, #1a1a1a 0%, #2b2419 35%, #141414 100%);
 }
+
 body::before{
   content:"";
   position:fixed;
@@ -36,214 +38,294 @@ body::before{
   pointer-events:none;
   z-index:0;
 }
+
 .container{
-  max-width:1200px;
+  max-width:1140px;
   margin:0 auto;
   position:relative;
   z-index:1;
 }
-.page-header{
+
+.page-title{
   text-align:center;
-  margin-bottom:32px;
-}
-.page-header h1{
-  font-size:32px;
+  font-size:34px;
   letter-spacing:4px;
-  color:#f5f5f5;
-  margin-bottom:14px;
   font-weight:500;
+  margin-bottom:10px;
+  color:#f5f5f5;
 }
-.desc-text{
-  color:#b8b8b8;
-  font-size:15px;
-  letter-spacing:0.5px;
-  line-height:1.6;
+
+.page-title span{
+  color:#d4af37;
 }
-/* 搜索框 */
-.search-box-wrap{
-  margin-bottom:36px;
+
+.page-desc{
   text-align:center;
+  color:#b8b8b8;
+  font-size:14px;
+  letter-spacing:2px;
+  margin-bottom:48px;
 }
-#searchInput{
-  width:min(100%, 460px);
-  padding:14px 20px;
-  background:rgba(255,255,255,0.06);
-  border:1px solid rgba(212,175,55,0.3);
-  border-radius:999px;
-  color:#fff;
-  font-size:15px;
-  outline:none;
-  transition:0.3s;
-}
-#searchInput::placeholder{
-  color:#999;
-}
-#searchInput:focus{
-  border-color:rgba(212,175,55,0.7);
-  background:rgba(255,255,255,0.09);
-}
-.brand-grid{
+
+.grid{
   display:grid;
   grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-  gap:26px;
+  gap:28px;
 }
+
 .brand-card{
   background:linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
   border:1px solid rgba(255,255,255,0.12);
-  border-radius:18px;
+  border-radius:20px;
   overflow:hidden;
-  transition:0.35s ease;
+  text-align:center;
   text-decoration:none;
-  color:#fff;
-  display:block;
+  color:#f5f5f5;
+  transition:all 0.35s ease;
+  position:relative;
 }
+
+.brand-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  padding:1px;
+  background:linear-gradient(145deg, rgba(212,175,55,0.6), transparent 40%, transparent 70%, rgba(255,255,255,0.2));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  opacity:0;
+  transition:opacity 0.35s ease;
+  pointer-events:none;
+}
+
 .brand-card:hover{
   transform:translateY(-8px);
-  border-color:rgba(212,175,55,0.48);
-  box-shadow:0 20px 40px rgba(0,0,0,0.45);
+  border-color:rgba(212,175,55,0.45);
+  box-shadow:0 20px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.25);
+  background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
 }
-.card-img-wrap{
-  height:200px;
+
+.brand-card:hover::before{
+  opacity:1;
+}
+
+.brand-logo{
+  width:100%;
+  height:170px;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:18px;
-  background:rgba(255,255,255,0.04);
+  padding:22px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
 }
-.card-img-wrap img{
+
+.brand-logo img{
   max-width:100%;
   max-height:100%;
   object-fit:contain;
+  filter:brightness(1.1) contrast(1.05);
+  transition:transform 0.4s ease;
 }
-.card-name{
-  text-align:center;
-  padding:14px 10px;
-  font-size:15px;
-  letter-spacing:1px;
-  color:#ddd;
+
+.brand-card:hover .brand-logo img{
+  transform:scale(1.06);
 }
-/* WhatsApp悬浮按钮 */
-.wa-float{
+
+.brand-name{
+  padding:16px;
+  font-size:14px;
+  letter-spacing:2px;
+  font-weight:500;
+  color:#f0f0f0;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+
+.contact-float{
   position:fixed;
-  right:24px;
-  bottom:24px;
-  width:60px;
-  height:60px;
+  right:28px;
+  bottom:28px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+  z-index:50;
+}
+
+.contact-btn{
+  width:56px;
+  height:56px;
   border-radius:50%;
-  background:#25D366;
   display:flex;
   align-items:center;
   justify-content:center;
-  color:white;
-  font-size:28px;
+  color:#fff;
+  font-size:26px;
   text-decoration:none;
-  z-index:99;
-  box-shadow:0 6px 18px rgba(0,0,0,0.4);
-  transition:0.25s;
+  box-shadow:0 10px 24px rgba(0,0,0,0.45);
+  transition:transform 0.25s ease;
+  position:relative;
+  overflow:hidden;
 }
-.wa-float:hover{
-  background:#1fbb59;
-  transform:scale(1.08);
+
+.contact-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  padding:1px;
+  background:linear-gradient(145deg, rgba(255,255,255,0.6), transparent);
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  pointer-events:none;
 }
-footer{
-  margin-top:60px;
-  text-align:center;
-  color:#888;
-  font-size:13px;
+
+.contact-btn:hover{
+  transform:scale(1.12);
 }
+
+.wa{
+  background:#25D366;
+}
+
+.mail{
+  background:#448aff;
+}
+
 @media(max-width:768px){
-  .page-header h1{
-    font-size:24px;
+  body{
+    padding:32px 14px 100px;
   }
-  .brand-grid{
-    grid-template-columns:repeat(auto-fill, minmax(145px, 1fr));
+
+  .page-title{
+    font-size:26px;
+    letter-spacing:3px;
+  }
+
+  .page-desc{
+    font-size:12px;
+    letter-spacing:1px;
+    margin-bottom:32px;
+  }
+
+  .grid{
+    grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));
     gap:16px;
   }
-  .card-img-wrap{
-    height:145px;
+
+  .brand-logo{
+    height:130px;
+    padding:16px;
   }
-  .wa-float{
-    width:52px;
-    height:52px;
-    font-size:24px;
+
+  .brand-name{
+    font-size:12px;
+    letter-spacing:1px;
+    padding:12px;
+  }
+
+  .contact-float{
     right:16px;
     bottom:16px;
+    gap:12px;
+  }
+
+  .contact-btn{
+    width:50px;
+    height:50px;
+    font-size:22px;
   }
 }
 </style>
 </head>
 <body>
+
 <div class="container">
-  <div class="page-header">
-    <h1>YJIA BRAND CATALOG</h1>
-    <p class="desc-text">Our Brand Catalog, click brand to view product pictures, contact us via WhatsApp for inquiry.</p>
-  </div>
+  <h1 class="page-title">YJIA <span>Brand</span> Collection</h1>
+  <p class="page-desc">LUXURY FASHION & JEWELRY GALLERY</p>
 
-  <div class="search-box-wrap">
-    <input id="searchInput" placeholder="Search brand name..." />
-  </div>
-
-  <div class="brand-grid" id="brandGrid">
-    <!-- ========== ALL ITEMS 入口 ========== -->
-    <a class="brand-card" href="https://gallery.yjia.shop?brand=" target="_blank" data-name="All Items">
-      <div class="card-img-wrap">
-        <img src="https://img.yjia.shop/all-logo.png" loading="lazy" alt="All Items">
-      </div>
-      <div class="card-name">All Items</div>
-    </a>
-
-    <!-- ========== 你的品牌卡片在这里，继续往下新增 ========== -->
-    <a class="brand-card" href="https://gallery.yjia.shop?brand=DIOR" target="_blank" data-name="DIOR">
-      <div class="card-img-wrap">
-        <img src="https://img.yjia.shop/DIOR-logo.png" loading="lazy" alt="DIOR">
-      </div>
-      <div class="card-name">DIOR</div>
-    </a>
-    <a class="brand-card" href="https://gallery.yjia.shop?brand=CHANEL" target="_blank" data-name="CHANEL">
-      <div class="card-img-wrap">
-        <img src="https://img.yjia.shop/CHANEL-logo.png" loading="lazy" alt="CHANEL">
-      </div>
-      <div class="card-name">CHANEL</div>
-    </a>
-    <a class="brand-card" href="https://gallery.yjia.shop?brand=GUCCI" target="_blank" data-name="GUCCI">
-      <div class="card-img-wrap">
-        <img src="https://img.yjia.shop/gucci-logo.png" loading="lazy" alt="GUCCI">
-      </div>
-      <div class="card-name">GUCCI</div>
-    </a>
-    <a class="brand-card" href="https://gallery.yjia.shop?brand=LV" target="_blank" data-name="LV">
-      <div class="card-img-wrap">
-        <img src="https://img.yjia.shop/LV-logo.png" loading="lazy" alt="LV">
-      </div>
-      <div class="card-name">LV</div>
-    </a>
-    <!-- 👉 新增品牌直接复制上面a标签块，修改href参数、data-name、图片src、卡片文字 -->
-  </div>
-
-  <footer>
-    Yingjia (Maoming) International Trade Co., Ltd<br>
-    All pictures are for reference only, for wholesale inquiry.
-  </footer>
+  <div class="grid" id="brandGrid"></div>
 </div>
 
-<!-- WhatsApp悬浮按钮【修改这里号码！】 -->
-<a class="wa-float" href="https://wa.me/8618566956446" target="_blank">💬</a>
+<div class="contact-float">
+  <a class="contact-btn wa" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp">💬</a>
+  <a class="contact-btn mail" href="mailto:c1403276506@gmail.com" title="Email">✉️</a>
+</div>
 
 <script>
-const searchInput = document.getElementById("searchInput");
-const cards = document.querySelectorAll(".brand-card");
+// ==============================================
+// 【这里只需要填一次你的 Logo 基础域名】
+// ==============================================
+const LOGO_BASE_URL = "https://img.yjia.shop/";
 
-searchInput.addEventListener("input", function(){
-  const keyword = this.value.trim().toLowerCase();
-  cards.forEach(card=>{
-    const name = card.dataset.name.toLowerCase();
-    if(name.includes(keyword)){
-      card.style.display = "block";
-    }else{
-      card.style.display = "none";
-    }
-  })
-})
+const brands = [
+  { folder: "ALEXANDER MCQUEEN", logoFile: "ALEXANDER MCQUEEN-logo.png", displayName: "ALEXANDER MCQUEEN" },
+  { folder: "Armani", logoFile: "Armani-logo.png", displayName: "Armani" },
+  { folder: "BOTTEGAVENETA", logoFile: "BOTTEGAVENETA-logo.png", displayName: "BOTTEGAVENETA" },
+  { folder: "BVLGARI", logoFile: "BVLGARI-logo.png", displayName: "BVLGARI" },
+  { folder: "Balenciaga", logoFile: "Balenciaga-logo.png", displayName: "Balenciaga" },
+  { folder: "Burberry", logoFile: "Burberry-logo.png", displayName: "Burberry" },
+  { folder: "CELINE", logoFile: "CELINE-logo.png", displayName: "CELINE" },
+  { folder: "CHAUMET", logoFile: "CHAUMET-logo.png", displayName: "CHAUMET" },
+  { folder: "Cartier", logoFile: "Cartier-logo.png", displayName: "Cartier" },
+  { folder: "Dolce&Gabbana", logoFile: "Dolce&Gabbana-logo.png", displayName: "Dolce&Gabbana" },
+  { folder: "FENDI", logoFile: "FENDI-logo.png", displayName: "FENDI" },
+  { folder: "FRED", logoFile: "FRED-logo.png", displayName: "FRED" },
+  { folder: "Givenchy", logoFile: "Givenchy-logo.png", displayName: "Givenchy" },
+  { folder: "Graff", logoFile: "Graff-logo.png", displayName: "Graff" },
+  { folder: "Hermès", logoFile: "Hermès-logo.png", displayName: "Hermès" },
+  { folder: "LOEWE", logoFile: "LOEWE-logo.png", displayName: "LOEWE" },
+  { folder: "Messika", logoFile: "Messika-logo.png", displayName: "Messika" },
+  { folder: "Miu Miu", logoFile: "Miu Miu-logo.png", displayName: "Miu Miu" },
+  { folder: "PRADA", logoFile: "PRADA-logo.png", displayName: "PRADA" },
+  { folder: "SWAROVSKI", logoFile: "SWAROVSKI-logo.png", displayName: "SWAROVSKI" },
+  { folder: "TIFFANY & CO", logoFile: "TIFFANY & CO-logo.png", displayName: "TIFFANY & CO" },
+  { folder: "TORY BURCH", logoFile: "TORY BURCH-logo.png", displayName: "TORY BURCH" },
+  { folder: "VALENTINO", logoFile: "VALENTINO-logo.png", displayName: "VALENTINO" },
+  { folder: "Van Cleef & Arpels", logoFile: "Van Cleef & Arpels-logo.png", displayName: "Van Cleef & Arpels" },
+  { folder: "Versace", logoFile: "Versace-logo.png", displayName: "Versace" },
+  { folder: "VivienneWestwood", logoFile: "VivienneWestwood-logo.png", displayName: "VivienneWestwood" },
+  { folder: "YSL", logoFile: "YSL-logo.png", displayName: "YSL" },
+  { folder: "chanel", logoFile: "chanel-logo.png", displayName: "CHANEL" },
+  { folder: "dior", logoFile: "dior-logo.png", displayName: "DIOR" },
+  { folder: "gucci", logoFile: "gucci-logo.png", displayName: "GUCCI" },
+  { folder: "lv", logoFile: "lv-logo.png", displayName: "LV" }
+];
+
+const grid = document.getElementById("brandGrid");
+
+brands.forEach(brand => {
+  const logoUrl = LOGO_BASE_URL + brand.logoFile;
+
+  const card = document.createElement("a");
+  card.className = "brand-card";
+  card.href = "https://gallery.yjia.shop/?brand=" + encodeURIComponent(brand.folder);
+  card.target = "_self";
+
+  card.innerHTML = `
+    <div class="brand-logo">
+      <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy">
+    </div>
+    <div class="brand-name">${brand.displayName}</div>
+  `;
+
+  grid.appendChild(card);
+});
 </script>
+
 </body>
 </html>
+1688找货源
+
+
+❯
+
+
+
+
+logo
+1688
+官方采购助手
+·
+close
