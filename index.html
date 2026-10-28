@@ -264,6 +264,12 @@ img.img-error + .logo-fallback{
 </div>
 <!--2.全局悬浮WA按钮，号码已填好-->
 <a class="wa-float" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp Contact">💬</a>
+
+<!--相册更新标记 自用，上新后修改日期-->
+<div style="position:fixed; right:14px; bottom:80px; font-size:11px; color:#aaa; background:rgba(0,0,0,0.35); padding:4px 8px; border-radius:6px; z-index:40;">
+相册更新：<span>2026‑10‑28</span>
+</div>
+
 <script>
 // ==============================================
 // 【这里只需要填一次你的 Logo 基础域名】
@@ -303,7 +309,6 @@ const brands = [
   { folder: "gucci", logoFile: "gucci-logo.png", displayName: "GUCCI" },
   { folder: "lv", logoFile: "lv-logo.png", displayName: "LV" }
 ];
-
 const grid = document.getElementById("brandGrid");
 const cardDomList = [];
 brands.forEach(brand => {
@@ -311,11 +316,9 @@ brands.forEach(brand => {
   const card = document.createElement("div");
   card.className = "brand-card";
   card.dataset.searchName = brand.displayName.toLowerCase();
-
   // 两个跳转链接，必须同时携带 brand + type
   const jewelryUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=jewelry`;
   const bagUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=bag`;
-
   card.innerHTML = `
     <div class="brand-logo">
       <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy" onerror="this.classList.add('img-error')">
@@ -330,7 +333,6 @@ brands.forEach(brand => {
   grid.appendChild(card);
   cardDomList.push(card);
 });
-
 //搜索筛选逻辑
 const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input",function(){
@@ -347,16 +349,3 @@ searchInput.addEventListener("input",function(){
 </script>
 </body>
 </html>
-1688找货源
-
-
-❯
-
-
-
-
-logo
-1688
-官方采购助手
-·
-close
