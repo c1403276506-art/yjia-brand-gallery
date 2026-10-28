@@ -1,3 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YJIA Brand Collection</title>
+<link rel="preconnect" href="https://gallery.yjia.shop">
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+body{
+  min-height:100vh;
+  padding:48px 16px 120px;
+  color:#fff;
+  position:relative;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.08), transparent 45%),
+    radial-gradient(circle at 80% 10%, rgba(212, 175, 55, 0.12), transparent 50%),
+    radial-gradient(circle at 50% 90%, rgba(255, 255, 255, 0.05), transparent 40%),
+    linear-gradient(135deg, #1a1a1a 0%, #2b2419 35%, #141414 100%);
+}
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(255,255,255,0.06) 1px, transparent 1.5px),
+    radial-gradient(circle at 85% 35%, rgba(212,175,55,0.05) 1px, transparent 1.5px),
+    radial-gradient(circle at 45% 80%, rgba(255,255,255,0.04) 1px, transparent 1.5px);
+  background-size:120px 120px, 180px 180px, 160px 160px;
+  pointer-events:none;
+  z-index:0;
+}
+.container{
+  max-width:1140px;
+  margin:0 auto;
+  position:relative;
+  z-index:1;
+}
+.page-title{
+  text-align:center;
+  font-size:34px;
+  letter-spacing:4px;
+  font-weight:500;
+  margin-bottom:10px;
+  color:#f5f5f5;
+}
+.page-title span{
+  color:#d4af37;
+}
+.page-desc{
+  text-align:center;
+  color:#b8b8b8;
+  font-size:14px;
+  letter-spacing:2px;
+  margin-bottom:20px;
+  line-height:1.6;
+}
+/*搜索框样式*/
+.search-wrap{
+  text-align:center;
+  margin-bottom:40px;
+}
+#searchInput{
+  width:min(95%,480px);
+  padding:14px 22px;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(212,175,55,0.3);
+  border-radius:999px;
+  color:#fff;
+  font-size:15px;
+  outline:none;
+}
+#searchInput::placeholder{
+  color:#999;
+}
+#searchInput:focus{
+  border-color:rgba(212,175,55,0.7);
+  background:rgba(255,255,255,0.09);
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+  gap:28px;
+}
+.brand-card{
+  background:linear-gradient(145deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:20px;
+  overflow:hidden;
+  text-align:center;
+  color:#f5f5f5;
+  transition:all 0.35s ease;
+  position:relative;
+}
+.brand-card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:20px;
+  padding:1px;
+  background:linear-gradient(145deg, rgba(212,175,55,0.6), transparent 40%, transparent 70%, rgba(255,255,255,0.2));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
+  opacity:0;
+  transition:opacity 0.35s ease;
+  pointer-events:none;
+}
+.brand-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(212,175,55,0.45);
+  box-shadow:0 20px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.25);
+  background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+}
+.brand-card:hover::before{
+  opacity:1;
+}
+.brand-logo{
+  width:100%;
+  height:170px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  position:relative;
+}
+.brand-logo img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  filter:brightness(1.1) contrast(1.05);
+  transition:transform 0.4s ease;
+}
+.brand-card:hover .brand-logo img{
+  transform:scale(1.06);
+}
+/*图片加载失败文字占位*/
+.logo-fallback{
+  position:absolute;
+  color:#888;
+  font-size:22px;
+  letter-spacing:2px;
+  display:none;
+}
+img.img-error{
+  display:none;
+}
+img.img-error + .logo-fallback{
+  display:block;
+}
+.brand-name{
+  padding:12px 16px 8px;
+  font-size:14px;
+  letter-spacing:2px;
+  font-weight:500;
+  color:#f0f0f0;
+  border-top:1px solid rgba(255,255,255,0.08);
+}
+/*分类按钮组 jewelry / bag*/
+.btn-group{
+  display:flex;
+  gap:8px;
+  padding:0 14px 16px;
+}
+.btn-group a{
+  flex:1;
+  display:block;
+  padding:8px 4px;
+  font-size:12px;
+  border-radius:8px;
+  text-decoration:none;
+  letter-spacing:1px;
+  border:1px solid rgba(212,175,55,0.4);
+  color:#d4af37;
+  transition:0.25s;
+}
+.btn-group a:hover{
+  background:rgba(212,175,55,0.25);
+}
+/*右下角悬浮WhatsApp按钮*/
+.wa-float{
+  position:fixed;
+  right:28px;
+  bottom:28px;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:#25D366;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:26px;
+  text-decoration:none;
+  z-index:50;
+  box-shadow:0 10px 24px rgba(0,0,0,0.45);
+  transition:transform 0.25s ease;
+}
+.wa-float:hover{
+  transform:scale(1.12);
+  background:#1fbb59;
+}
+@media(max-width:768px){
+  body{
+    padding:32px 14px 100px;
+  }
+  .page-title{
+    font-size:26px;
+    letter-spacing:3px;
+  }
+  .page-desc{
+    font-size:12px;
+    letter-spacing:1px;
+    margin-bottom:20px;
+  }
+  .grid{
+    grid-template-columns:repeat(auto-fill, minmax(170px, 1fr));
+    gap:16px;
+  }
+  .brand-logo{
+    height:130px;
+    padding:16px;
+  }
+  .brand-name{
+    font-size:12px;
+    letter-spacing:1px;
+    padding:10px 12px 6px;
+  }
+  .btn-group{
+    gap:6px;
+    padding:0 10px 12px;
+  }
+  .btn-group a{
+    padding:7px 2px;
+    font-size:11px;
+  }
+  .wa-float{
+    right:16px;
+    bottom:16px;
+    width:50px;
+    height:50px;
+    font-size:22px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="page-title">YJIA <span>Brand</span> Collection</h1>
+  <!--1.首页说明文案-->
+  <p class="page-desc">LUXURY FASHION & JEWELRY GALLERY. Click brand to view catalog, contact WhatsApp for wholesale inquiry.</p>
+  <!--7.品牌搜索输入框-->
+  <div class="search-wrap">
+    <input id="searchInput" placeholder="Search brand name..." />
+  </div>
+  <div class="grid" id="brandGrid"></div>
+</div>
+<!--2.全局悬浮WA按钮，号码已填好-->
+<a class="wa-float" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp Contact">💬</a>
+<script>
+// ==============================================
+// 【这里只需要填一次你的 Logo 基础域名】
+// ==============================================
+const LOGO_BASE_URL = "https://img.yjia.shop/";
+//品牌数组，保留原有全部品牌，移除All‑Items（当前Worker不支持空folder）
+const brands = [
+  { folder: "ALEXANDER MCQUEEN", logoFile: "ALEXANDER MCQUEEN-logo.png", displayName: "ALEXANDER MCQUEEN" },
+  { folder: "Armani", logoFile: "Armani-logo.png", displayName: "Armani" },
+  { folder: "BOTTEGAVENETA", logoFile: "BOTTEGAVENETA-logo.png", displayName: "BOTTEGAVENETA" },
+  { folder: "BVLGARI", logoFile: "BVLGARI-logo.png", displayName: "BVLGARI" },
+  { folder: "Balenciaga", logoFile: "Balenciaga-logo.png", displayName: "Balenciaga" },
+  { folder: "Burberry", logoFile: "Burberry-logo.png", displayName: "Burberry" },
+  { folder: "CELINE", logoFile: "CELINE-logo.png", displayName: "CELINE" },
+  { folder: "CHAUMET", logoFile: "CHAUMET-logo.png", displayName: "CHAUMET" },
+  { folder: "Cartier", logoFile: "Cartier-logo.png", displayName: "Cartier" },
+  { folder: "Dolce&Gabbana", logoFile: "Dolce&Gabbana-logo.png", displayName: "Dolce&Gabbana" },
+  { folder: "FENDI", logoFile: "FENDI-logo.png", displayName: "FENDI" },
+  { folder: "FRED", logoFile: "FRED-logo.png", displayName: "FRED" },
+  { folder: "Givenchy", logoFile: "Givenchy-logo.png", displayName: "Givenchy" },
+  { folder: "Graff", logoFile: "Graff-logo.png", displayName: "Graff" },
+  { folder: "Hermès", logoFile: "Hermès-logo.png", displayName: "Hermès" },
+  { folder: "LOEWE", logoFile: "LOEWE-logo.png", displayName: "LOEWE" },
+  { folder: "Messika", logoFile: "Messika-logo.png", displayName: "Messika" },
+  { folder: "Miu Miu", logoFile: "Miu Miu-logo.png", displayName: "Miu Miu" },
+  { folder: "PRADA", logoFile: "PRADA-logo.png", displayName: "PRADA" },
+  { folder: "SWAROVSKI", logoFile: "SWAROVSKI-logo.png", displayName: "SWAROVSKI" },
+  { folder: "TIFFANY & CO", logoFile: "TIFFANY & CO-logo.png", displayName: "TIFFANY & CO" },
+  { folder: "TORY BURCH", logoFile: "TORY BURCH-logo.png", displayName: "TORY BURCH" },
+  { folder: "VALENTINO", logoFile: "VALENTINO-logo.png", displayName: "VALENTINO" },
+  { folder: "Van Cleef & Arpels", logoFile: "Van Cleef & Arpels-logo.png", displayName: "Van Cleef & Arpels" },
+  { folder: "Versace", logoFile: "Versace-logo.png", displayName: "Versace" },
+  { folder: "VivienneWestwood", logoFile: "VivienneWestwood-logo.png", displayName: "VivienneWestwood" },
+  { folder: "YSL", logoFile: "YSL-logo.png", displayName: "YSL" },
+  { folder: "chanel", logoFile: "chanel-logo.png", displayName: "CHANEL" },
+  { folder: "dior", logoFile: "dior-logo.png", displayName: "DIOR" },
+  { folder: "gucci", logoFile: "gucci-logo.png", displayName: "GUCCI" },
+  { folder: "lv", logoFile: "lv-logo.png", displayName: "LV" }
+];
+
+const grid = document.getElementById("brandGrid");
+const cardDomList = [];
+brands.forEach(brand => {
+  const logoUrl = LOGO_BASE_URL + brand.logoFile;
+  const card = document.createElement("div");
+  card.className = "brand-card";
+  card.dataset.searchName = brand.displayName.toLowerCase();
+
+  // 两个跳转链接，必须同时携带 brand + type
+  const jewelryUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=jewelry`;
+  const bagUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=bag`;
+
+  card.innerHTML = `
+    <div class="brand-logo">
+      <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy" onerror="this.classList.add('img-error')">
+      <div class="logo-fallback">${brand.displayName}</div>
+    </div>
+    <div class="brand-name">${brand.displayName}</div>
+    <div class="btn-group">
+      <a href="${jewelryUrl}" target="_blank">Jewelry</a>
+      <a href="${bagUrl}" target="_blank">Bag</a>
+    </div>
+  `;
+  grid.appendChild(card);
+  cardDomList.push(card);
+});
+
+//搜索筛选逻辑
+const searchInput = document.getElementById("searchInput");
+searchInput.addEventListener("input",function(){
+  const keyword = this.value.trim().toLowerCase();
+  cardDomList.forEach(card=>{
+    const name = card.dataset.searchName;
+    if(name.includes(keyword)){
+      card.style.display = "";
+    }else{
+      card.style.display = "none";
+    }
+  })
+})
+</script>
+</body>
+</html>
+1688找货源
+
+
+❯
+
+
+
+
+logo
+1688
+官方采购助手
+·
+close
 }
 .grid{
 display:grid;
