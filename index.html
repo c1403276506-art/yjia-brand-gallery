@@ -307,13 +307,14 @@ const brands = [
   { folder: "gucci", logoFile: "gucci-logo.png", displayName: "GUCCI" },
   { folder: "lv", logoFile: "lv-logo.png", displayName: "LV" }
 ];
+
 const grid = document.getElementById("brandGrid");
 const taskQueue = [];
 let isRunning = false;
 const cardDomList = [];
 
-// 渲染卡片（立刻渲染页面，logo懒加载，页面马上出来）
-brands.forEach(brand => {
+// 先一次性渲染全部卡片（优先保证页面出来！）
+for (const brand of brands) {
   const logoUrl = LOGO_BASE_URL + brand.logoFile;
   const card = document.createElement("div");
   card.className = "brand-card";
@@ -335,11 +336,10 @@ brands.forEach(brand => {
   grid.appendChild(card);
   cardDomList.push(card);
   const timeDom = card.querySelector(".brand-update-time");
-  // 加入排队任务
   taskQueue.push({folder: brand.folder, el: timeDom});
-});
+}
 
-// 串行任务处理器：一次只跑一个请求
+// 串行请求更新时间，不阻塞页面
 async function runQueue(){
   if(isRunning || taskQueue.length === 0) return;
   isRunning = true;
@@ -358,18 +358,16 @@ async function runQueue(){
     task.el.textContent = "read fail";
   }
   isRunning = false;
-  runQueue();
+  setTimeout(runQueue, 80);
 }
-// 启动排队
 runQueue();
 
-// 搜索功能不变
+// 搜索
 const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("input",function(){
-  const keyword = this.value.trim().toLowerCase();
+searchInput.addEventListener("input", function(){
+  const kw = this.value.trim().toLowerCase();
   cardDomList.forEach(card=>{
-    const name = card.dataset.searchName;
-    if(name.includes(keyword)){
+    if(card.dataset.searchName.includes(kw)){
       card.style.display = "";
     }else{
       card.style.display = "none";
