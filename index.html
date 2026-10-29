@@ -271,6 +271,7 @@ img.img-error + .logo-fallback{
 <div style="position:fixed; right:14px; bottom:80px; font-size:11px; color:#aaa; background:rgba(0,0,0,0.35); padding:4px 8px; border-radius:6px; z-index:40;">
 相册更新：<span>2026-10-28</span>
 </div>
+
 <script>
 const WORKER_BASE = "https://r2-gallery-api-super-breeze-9997.c1403276506.workers.dev";
 const LOGO_BASE_URL = "https://img.yjia.shop/";
@@ -308,71 +309,68 @@ const brands = [
   { folder: "lv", logoFile: "lv-logo.png", displayName: "LV" }
 ];
 
-const grid = document.getElementById("brandGrid");
-const taskQueue = [];
-let isRunning = false;
-const cardDomList = [];
+document.addEventListener('DOMContentLoaded', function(){
+  const grid = document.getElementById("brandGrid");
+  let htmlStr = "";
+  let taskList = [];
 
-// 先一次性渲染全部卡片（优先保证页面出来！）
-for (const brand of brands) {
-  const logoUrl = LOGO_BASE_URL + brand.logoFile;
-  const card = document.createElement("div");
-  card.className = "brand-card";
-  card.dataset.searchName = brand.displayName.toLowerCase();
-  const jewelryUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=jewelry`;
-  const bagUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=bag`;
-  card.innerHTML = `
-    <div class="brand-logo">
-      <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy" decoding="async" onerror="this.classList.add('img-error')">
-      <div class="logo-fallback">${brand.displayName}</div>
+  for (const brand of brands) {
+    const logoUrl = LOGO_BASE_URL + brand.logoFile;
+    const jewelryUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=jewelry`;
+    const bagUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=bag`;
+    htmlStr += `
+    <div class="brand-card" data-search="${brand.displayName.toLowerCase()}" data-folder="${brand.folder}">
+      <div class="brand-logo">
+        <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy" decoding="async" onerror="this.classList.add('img-error')">
+        <div class="logo-fallback">${brand.displayName}</div>
+      </div>
+      <div class="brand-name">${brand.displayName}</div>
+      <div class="brand-update-time">waiting…</div>
+      <div class="btn-group">
+        <a href="${jewelryUrl}" target="_blank">Jewelry</a>
+        <a href="${bagUrl}" target="_blank">Bag</a>
+      </div>
     </div>
-    <div class="brand-name">${brand.displayName}</div>
-    <div class="brand-update-time">waiting…</div>
-    <div class="btn-group">
-      <a href="${jewelryUrl}" target="_blank">Jewelry</a>
-      <a href="${bagUrl}" target="_blank">Bag</a>
-    </div>
-  `;
-  grid.appendChild(card);
-  cardDomList.push(card);
-  const timeDom = card.querySelector(".brand-update-time");
-  taskQueue.push({folder: brand.folder, el: timeDom});
-}
-
-// 串行请求更新时间，不阻塞页面
-async function runQueue(){
-  if(isRunning || taskQueue.length === 0) return;
-  isRunning = true;
-  const task = taskQueue.shift();
-  try{
-    const res = await fetch(`${WORKER_BASE}/brand-latest?brand=${encodeURIComponent(task.folder)}`);
-    const ret = await res.json();
-    if(!ret.latest){
-      task.el.textContent = "---";
-    }else{
-      const d = new Date(ret.latest);
-      const fmt = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
-      task.el.textContent = `Updated: ${fmt}`;
-    }
-  }catch(){
-    task.el.textContent = "read fail";
+    `;
   }
-  isRunning = false;
-  setTimeout(runQueue, 80);
-}
-runQueue();
+  grid.innerHTML = htmlStr;
 
-// 搜索
-const searchInput = document.getElementById("searchInput");
-searchInput.addEventListener("input", function(){
-  const kw = this.value.trim().toLowerCase();
-  cardDomList.forEach(card=>{
-    if(card.dataset.searchName.includes(kw)){
-      card.style.display = "";
-    }else{
-      card.style.display = "none";
+  // 串行拉取更新时间
+  taskList = Array.from(grid.querySelectorAll('.brand-card'));
+  async function next(){
+    if(!taskList.length) return;
+    const card = taskList.shift();
+    const folder = card.dataset.folder;
+    const timeDom = card.querySelector('.brand-update-time');
+    try{
+      const res = await fetch(`${WORKER_BASE}/brand-latest?brand=${encodeURIComponent(folder)}`);
+      const ret = await res.json();
+      if(ret.latest){
+        const d = new Date(ret.latest);
+        const fmt = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        timeDom.textContent = `Updated: ${fmt}`;
+      }else{
+        timeDom.textContent = "---";
+      }
+    }catch(e){
+      timeDom.textContent = "read fail";
     }
-  })
+    setTimeout(next,70);
+  }
+  next();
+
+  // 搜索
+  const searchInput = document.getElementById("searchInput");
+  searchInput.oninput = function(){
+    const kw = this.value.trim().toLowerCase();
+    document.querySelectorAll('.brand-card').forEach(card=>{
+      if(card.dataset.search.includes(kw)){
+        card.style.display = "";
+      }else{
+        card.style.display = "none";
+      }
+    })
+  }
 })
 </script>
 </body>
