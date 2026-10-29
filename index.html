@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>YJIA Brand Collection</title>
-<link rel="preconnect" href="https://gallery.yjia.shop">
+<link rel="preconnect" href="https://img.yjia.shop">
+<link rel="preconnect" href="https://r2-gallery-api-super-breeze-9997.c1403276506.workers.dev">
 <style>
 *{
   margin:0;
@@ -104,252 +105,265 @@ body::before{
   border-radius:20px;
   padding:1px;
   background:linear-gradient(145deg, rgba(212,175,55,0.6), transparent 40%, transparent 70%, rgba(255,255,255,0.2));
-  -webkit‑mask:linear‑gradient(#000 0 0) content‑box, linear‑gradient(#000 0 0);
-  -webkit‑mask‑composite:xor;
-          mask‑composite:exclude;
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;
+          mask-composite:exclude;
   opacity:0;
   transition:opacity 0.35s ease;
-  pointer‑events:none;
+  pointer-events:none;
 }
-.brand‑card:hover{
+.brand-card:hover{
   transform:translateY(-8px);
-  border‑color:rgba(212,175,55,0.45);
-  box‑shadow:0 20px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.25);
-  background:linear‑gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+  border-color:rgba(212,175,55,0.45);
+  box-shadow:0 20px 40px rgba(0,0,0,0.45), 0 0 0 1px rgba(212,175,55,0.25);
+  background:linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
 }
-.brand‑card:hover::before{
+.brand-card:hover::before{
   opacity:1;
 }
-.brand‑logo{
+.brand-logo{
   width:100%;
   height:170px;
   display:flex;
-  align‑items:center;
-  justify‑content:center;
+  align-items:center;
+  justify-content:center;
   padding:22px;
-  background:linear‑gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
   position:relative;
 }
-.brand‑logo img{
-  max‑width:100%;
-  max‑height:100%;
-  object‑fit:contain;
+.brand-logo img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
   filter:brightness(1.1) contrast(1.05);
   transition:transform 0.4s ease;
+  decoding:async;
 }
-.brand‑card:hover .brand‑logo img{
+.brand-card:hover .brand-logo img{
   transform:scale(1.06);
 }
-.logo‑fallback{
+.logo-fallback{
   position:absolute;
   color:#888;
-  font‑size:22px;
-  letter‑spacing:2px;
+  font-size:22px;
+  letter-spacing:2px;
   display:none;
 }
-img.img‑error{
+img.img-error{
   display:none;
 }
-img.img‑error + .logo‑fallback{
+img.img-error + .logo-fallback{
   display:block;
 }
-.brand‑name{
+.brand-name{
   padding:12px 16px 6px;
-  font‑size:14px;
-  letter‑spacing:2px;
-  font‑weight:500;
+  font-size:14px;
+  letter-spacing:2px;
+  font-weight:500;
   color:#f0f0f0;
-  border‑top:1px solid rgba(255,255,255,0.08);
+  border-top:1px solid rgba(255,255,255,0.08);
 }
-/*卡片内部更新时间样式*/
-.brand‑update‑time{
-  font‑size:11px;
+.brand-update-time{
+  font-size:11px;
   color:#aaa;
   padding:0 14px 6px;
 }
-.btn‑group{
+.btn-group{
   display:flex;
   gap:8px;
   padding:0 14px 16px;
 }
-.btn‑group a{
+.btn-group a{
   flex:1;
   display:block;
   padding:8px 4px;
-  font‑size:12px;
-  border‑radius:8px;
-  text‑decoration:none;
-  letter‑spacing:1px;
+  font-size:12px;
+  border-radius:8px;
+  text-decoration:none;
+  letter-spacing:1px;
   border:1px solid rgba(212,175,55,0.4);
   color:#d4af37;
   transition:0.25s;
 }
-.btn‑group a:hover{
+.btn-group a:hover{
   background:rgba(212,175,55,0.25);
 }
-.wa‑float{
+.wa-float{
   position:fixed;
   right:28px;
   bottom:28px;
   width:56px;
   height:56px;
-  border‑radius:50%;
+  border-radius:50%;
   background:#25D366;
   display:flex;
-  align‑items:center;
-  justify‑content:center;
+  align-items:center;
+  justify-content:center;
   color:#fff;
-  font‑size:26px;
-  text‑decoration:none;
-  z‑index:50;
-  box‑shadow:0 10px 24px rgba(0,0,0,0.45);
+  font-size:26px;
+  text-decoration:none;
+  z-index:50;
+  box-shadow:0 10px 24px rgba(0,0,0,0.45);
   transition:transform 0.25s ease;
 }
-.wa‑float:hover{
+.wa-float:hover{
   transform:scale(1.12);
   background:#1fbb59;
 }
-@media(max‑width:768px){
+@media(max-width:768px){
   body{
     padding:32px 14px 100px;
   }
-  .page‑title{
-    font‑size:26px;
-    letter‑spacing:3px;
+  .page-title{
+    font-size:26px;
+    letter-spacing:3px;
   }
-  .page‑desc{
-    font‑size:12px;
-    letter‑spacing:1px;
-    margin‑bottom:20px;
+  .page-desc{
+    font-size:12px;
+    letter-spacing:1px;
+    margin-bottom:20px;
   }
   .grid{
-    grid‑template‑columns:repeat(auto‑fill, minmax(170px, 1fr));
+    grid-template-columns:repeat(auto-fill, minmax(170px, 1fr));
     gap:16px;
   }
-  .brand‑logo{
+  .brand-logo{
     height:130px;
     padding:16px;
   }
-  .brand‑name{
-    font‑size:12px;
-    letter‑spacing:1px;
+  .brand-name{
+    font-size:12px;
+    letter-spacing:1px;
     padding:10px 12px 4px;
   }
-  .brand‑update‑time{
-    font‑size:10px;
+  .brand-update-time{
+    font-size:10px;
     padding:0 10px 4px;
   }
-  .btn‑group{
+  .btn-group{
     gap:6px;
     padding:0 10px 12px;
   }
-  .btn‑group a{
+  .btn-group a{
     padding:7px 2px;
-    font‑size:11px;
+    font-size:11px;
   }
-  .wa‑float{
+  .wa-float{
     right:16px;
     bottom:16px;
     width:50px;
     height:50px;
-    font‑size:22px;
+    font-size:22px;
   }
 }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1 class="page‑title">YJIA <span>Brand</span> Collection</h1>
-  <p class="page‑desc">LUXURY FASHION & JEWELRY GALLERY. Click brand to view catalog, contact WhatsApp for wholesale inquiry.</p>
-  <div class="search‑wrap">
+  <h1 class="page-title">YJIA <span>Brand</span> Collection</h1>
+  <p class="page-desc">LUXURY FASHION & JEWELRY GALLERY. Click brand to view catalog, contact WhatsApp for wholesale inquiry.</p>
+  <div class="search-wrap">
     <input id="searchInput" placeholder="Search brand name..." />
   </div>
   <div class="grid" id="brandGrid"></div>
 </div>
-<a class="wa‑float" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp Contact">💬</a>
-<div style="position:fixed; right:14px; bottom:80px; font‑size:11px; color:#aaa; background:rgba(0,0,0,0.35); padding:4px 8px; border‑radius:6px; z‑index:40;">
-相册更新：<span>2026‑10‑28</span>
+<a class="wa-float" href="https://wa.me/8618566956446" target="_blank" title="WhatsApp Contact">💬</a>
+<div style="position:fixed; right:14px; bottom:80px; font-size:11px; color:#aaa; background:rgba(0,0,0,0.35); padding:4px 8px; border-radius:6px; z-index:40;">
+相册更新：<span>2026-10-28</span>
 </div>
 <script>
-const WORKER_BASE = "https://r2‑gallery‑api‑super‑breeze‑9997.c1403276506.workers.dev";
+const WORKER_BASE = "https://r2-gallery-api-super-breeze-9997.c1403276506.workers.dev";
 const LOGO_BASE_URL = "https://img.yjia.shop/";
 const brands = [
-  { folder: "ALEXANDER MCQUEEN", logoFile: "ALEXANDER MCQUEEN‑logo.png", displayName: "ALEXANDER MCQUEEN" },
-  { folder: "Armani", logoFile: "Armani‑logo.png", displayName: "Armani" },
-  { folder: "BOTTEGAVENETA", logoFile: "BOTTEGAVENETA‑logo.png", displayName: "BOTTEGAVENETA" },
-  { folder: "BVLGARI", logoFile: "BVLGARI‑logo.png", displayName: "BVLGARI" },
-  { folder: "Balenciaga", logoFile: "Balenciaga‑logo.png", displayName: "Balenciaga" },
-  { folder: "Burberry", logoFile: "Burberry‑logo.png", displayName: "Burberry" },
-  { folder: "CELINE", logoFile: "CELINE‑logo.png", displayName: "CELINE" },
-  { folder: "CHAUMET", logoFile: "CHAUMET‑logo.png", displayName: "CHAUMET" },
-  { folder: "Cartier", logoFile: "Cartier‑logo.png", displayName: "Cartier" },
-  { folder: "Dolce&Gabbana", logoFile: "Dolce&Gabbana‑logo.png", displayName: "Dolce&Gabbana" },
-  { folder: "FENDI", logoFile: "FENDI‑logo.png", displayName: "FENDI" },
-  { folder: "FRED", logoFile: "FRED‑logo.png", displayName: "FRED" },
-  { folder: "Givenchy", logoFile: "Givenchy‑logo.png", displayName: "Givenchy" },
-  { folder: "Graff", logoFile: "Graff‑logo.png", displayName: "Graff" },
-  { folder: "Hermès", logoFile: "Hermès‑logo.png", displayName: "Hermès" },
-  { folder: "LOEWE", logoFile: "LOEWE‑logo.png", displayName: "LOEWE" },
-  { folder: "Messika", logoFile: "Messika‑logo.png", displayName: "Messika" },
-  { folder: "Miu Miu", logoFile: "Miu Miu‑logo.png", displayName: "Miu Miu" },
-  { folder: "PRADA", logoFile: "PRADA‑logo.png", displayName: "PRADA" },
-  { folder: "SWAROVSKI", logoFile: "SWAROVSKI‑logo.png", displayName: "SWAROVSKI" },
-  { folder: "TIFFANY & CO", logoFile: "TIFFANY & CO‑logo.png", displayName: "TIFFANY & CO" },
-  { folder: "TORY BURCH", logoFile: "TORY BURCH‑logo.png", displayName: "TORY BURCH" },
-  { folder: "VALENTINO", logoFile: "VALENTINO‑logo.png", displayName: "VALENTINO" },
-  { folder: "Van Cleef & Arpels", logoFile: "Van Cleef & Arpels‑logo.png", displayName: "Van Cleef & Arpels" },
-  { folder: "Versace", logoFile: "Versace‑logo.png", displayName: "Versace" },
-  { folder: "VivienneWestwood", logoFile: "VivienneWestwood‑logo.png", displayName: "VivienneWestwood" },
-  { folder: "YSL", logoFile: "YSL‑logo.png", displayName: "YSL" },
-  { folder: "chanel", logoFile: "chanel‑logo.png", displayName: "CHANEL" },
-  { folder: "dior", logoFile: "dior‑logo.png", displayName: "DIOR" },
-  { folder: "gucci", logoFile: "gucci‑logo.png", displayName: "GUCCI" },
-  { folder: "lv", logoFile: "lv‑logo.png", displayName: "LV" }
+  { folder: "ALEXANDER MCQUEEN", logoFile: "ALEXANDER MCQUEEN-logo.png", displayName: "ALEXANDER MCQUEEN" },
+  { folder: "Armani", logoFile: "Armani-logo.png", displayName: "Armani" },
+  { folder: "BOTTEGAVENETA", logoFile: "BOTTEGAVENETA-logo.png", displayName: "BOTTEGAVENETA" },
+  { folder: "BVLGARI", logoFile: "BVLGARI-logo.png", displayName: "BVLGARI" },
+  { folder: "Balenciaga", logoFile: "Balenciaga-logo.png", displayName: "Balenciaga" },
+  { folder: "Burberry", logoFile: "Burberry-logo.png", displayName: "Burberry" },
+  { folder: "CELINE", logoFile: "CELINE-logo.png", displayName: "CELINE" },
+  { folder: "CHAUMET", logoFile: "CHAUMET-logo.png", displayName: "CHAUMET" },
+  { folder: "Cartier", logoFile: "Cartier-logo.png", displayName: "Cartier" },
+  { folder: "Dolce&Gabbana", logoFile: "Dolce&Gabbana-logo.png", displayName: "Dolce&Gabbana" },
+  { folder: "FENDI", logoFile: "FENDI-logo.png", displayName: "FENDI" },
+  { folder: "FRED", logoFile: "FRED-logo.png", displayName: "FRED" },
+  { folder: "Givenchy", logoFile: "Givenchy-logo.png", displayName: "Givenchy" },
+  { folder: "Graff", logoFile: "Graff-logo.png", displayName: "Graff" },
+  { folder: "Hermès", logoFile: "Hermès-logo.png", displayName: "Hermès" },
+  { folder: "LOEWE", logoFile: "LOEWE-logo.png", displayName: "LOEWE" },
+  { folder: "Messika", logoFile: "Messika-logo.png", displayName: "Messika" },
+  { folder: "Miu Miu", logoFile: "Miu Miu-logo.png", displayName: "Miu Miu" },
+  { folder: "PRADA", logoFile: "PRADA-logo.png", displayName: "PRADA" },
+  { folder: "SWAROVSKI", logoFile: "SWAROVSKI-logo.png", displayName: "SWAROVSKI" },
+  { folder: "TIFFANY & CO", logoFile: "TIFFANY & CO-logo.png", displayName: "TIFFANY & CO" },
+  { folder: "TORY BURCH", logoFile: "TORY BURCH-logo.png", displayName: "TORY BURCH" },
+  { folder: "VALENTINO", logoFile: "VALENTINO-logo.png", displayName: "VALENTINO" },
+  { folder: "Van Cleef & Arpels", logoFile: "Van Cleef & Arpels-logo.png", displayName: "Van Cleef & Arpels" },
+  { folder: "Versace", logoFile: "Versace-logo.png", displayName: "Versace" },
+  { folder: "VivienneWestwood", logoFile: "VivienneWestwood-logo.png", displayName: "VivienneWestwood" },
+  { folder: "YSL", logoFile: "YSL-logo.png", displayName: "YSL" },
+  { folder: "chanel", logoFile: "chanel-logo.png", displayName: "CHANEL" },
+  { folder: "dior", logoFile: "dior-logo.png", displayName: "DIOR" },
+  { folder: "gucci", logoFile: "gucci-logo.png", displayName: "GUCCI" },
+  { folder: "lv", logoFile: "lv-logo.png", displayName: "LV" }
 ];
 const grid = document.getElementById("brandGrid");
+const taskQueue = [];
+let isRunning = false;
 const cardDomList = [];
 
+// 渲染卡片（立刻渲染页面，logo懒加载，页面马上出来）
 brands.forEach(brand => {
   const logoUrl = LOGO_BASE_URL + brand.logoFile;
   const card = document.createElement("div");
-  card.className = "brand‑card";
+  card.className = "brand-card";
   card.dataset.searchName = brand.displayName.toLowerCase();
   const jewelryUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=jewelry`;
   const bagUrl = `https://gallery.yjia.shop/?brand=${encodeURIComponent(brand.folder)}&type=bag`;
   card.innerHTML = `
-    <div class="brand‑logo">
-      <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy" onerror="this.classList.add('img‑error')">
-      <div class="logo‑fallback">${brand.displayName}</div>
+    <div class="brand-logo">
+      <img src="${logoUrl}" alt="${brand.displayName}" loading="lazy" decoding="async" onerror="this.classList.add('img-error')">
+      <div class="logo-fallback">${brand.displayName}</div>
     </div>
-    <div class="brand‑name">${brand.displayName}</div>
-    <!--卡片内自动更新时间位置-->
-    <div class="brand‑update‑time">loading…</div>
-    <div class="btn‑group">
+    <div class="brand-name">${brand.displayName}</div>
+    <div class="brand-update-time">waiting…</div>
+    <div class="btn-group">
       <a href="${jewelryUrl}" target="_blank">Jewelry</a>
       <a href="${bagUrl}" target="_blank">Bag</a>
     </div>
   `;
   grid.appendChild(card);
   cardDomList.push(card);
-
-  //异步拉取该品牌最新时间
-  const timeDom = card.querySelector(".brand‑update‑time");
-  fetch(`${WORKER_BASE}/brand‑latest?brand=${encodeURIComponent(brand.folder)}`)
-    .then(res=>res.json())
-    .then(ret=>{
-      if(!ret.latest){
-        timeDom.textContent = "‑‑‑";
-        return;
-      }
-      const d = new Date(ret.latest);
-      const fmt = `${d.getFullYear()}‑${String(d.getMonth()+1).padStart(2,'0')}‑${String(d.getDate()).padStart(2,'0')}`;
-      timeDom.textContent = `Updated: ${fmt}`;
-    })
-    .catch(()=>{
-      timeDom.textContent = "read fail";
-    })
+  const timeDom = card.querySelector(".brand-update-time");
+  // 加入排队任务
+  taskQueue.push({folder: brand.folder, el: timeDom});
 });
 
+// 串行任务处理器：一次只跑一个请求
+async function runQueue(){
+  if(isRunning || taskQueue.length === 0) return;
+  isRunning = true;
+  const task = taskQueue.shift();
+  try{
+    const res = await fetch(`${WORKER_BASE}/brand-latest?brand=${encodeURIComponent(task.folder)}`);
+    const ret = await res.json();
+    if(!ret.latest){
+      task.el.textContent = "---";
+    }else{
+      const d = new Date(ret.latest);
+      const fmt = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+      task.el.textContent = `Updated: ${fmt}`;
+    }
+  }catch(){
+    task.el.textContent = "read fail";
+  }
+  isRunning = false;
+  runQueue();
+}
+// 启动排队
+runQueue();
+
+// 搜索功能不变
 const searchInput = document.getElementById("searchInput");
 searchInput.addEventListener("input",function(){
   const keyword = this.value.trim().toLowerCase();
